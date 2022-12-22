@@ -33,25 +33,33 @@ function startApp(name){
  * @param  {string} text data typed by the user
  * @returns {void}
  */
+const List = [help, quit, hello, batata, exit];
+
+
 function onDataReceived(text) {
-  if (text === 'quit\n' || text ==='exit\n') {
+  var text = text.trim();
+
+  if (text === 'quit' || text ==='exit') {
     quit();
   }
   else if(text==='hello\n'){
     hello();
   }
-
-  else if(text === 'batata\n'){
+  
+  
+  else if (text.startsWith("hello")) {
+    hello(text);
+  }
+  else if(text === 'batata'){
     batata();
   }
-  else if (text === 'help\n') {
+  else if (text === 'help') {
     help();
   }
   else{
     unknownCommand(text);
   }
 }
-
 
 /**
  * prints "unknown command"
@@ -64,14 +72,15 @@ function unknownCommand(c){
   console.log('unknown command: "'+c.trim()+'"')
 }
 
-const List = [help, quit, hello, batata, exit];
+
 /**
  * Says hello
  *
  * @returns {void}
  */
 function hello(){
-  console.log('hello!')
+
+  console.log('hello!');
 }
 function batata(){
   console.log('batata!');
@@ -83,6 +92,12 @@ function help() {
   console.log('----------------------------');
 
 }
+
+function hello(arg) {
+  arg == "hello" ? console.log("hello!") : console.log(arg + "!");
+  console.log('----------------------------');
+}
+
 
 
 /**
@@ -98,6 +113,7 @@ function exit(){
   console.log('Quitting now, goodbye!')
   process.exit();
 }
+
 
 
 // The following line starts the application
