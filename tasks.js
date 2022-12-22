@@ -33,7 +33,7 @@ function startApp(name){
  * @param  {string} text data typed by the user
  * @returns {void}
  */
-const List = [help, quit, hello, batata, exit, add, remove, list];
+const List = [help, quit, hello, batata, exit, add, remove, list, edit];
 
 
 function onDataReceived(text) {
@@ -50,6 +50,9 @@ function onDataReceived(text) {
   }
   else if (text.startsWith("remove")) {
     remove(text);
+  }
+  else if (text.startsWith("edit")) {
+    edit(text);
   }
   
   else if (text.startsWith("hello")) {
@@ -111,21 +114,28 @@ function hello(arg) {
 // Initialize an empty array to store the tasks
 const tasks = [];
 
+
 function list() {
   // Print the task list
   console.log('Task list:');
   for (let i = 0; i < tasks.length; i++) {
-    console.log(`${i + 1}: ${tasks[i]}`);
+  console.log(`${i + 1}: ${tasks[i]}`);
   }
   console.log('----------------------------');
-}
+  }
+  
 
-function add(task) {
-  // Add the task to the list
-  tasks.push(task);
-  console.log(`Added task: ${task}`);
-  console.log('----------------------------');
-}
+
+  function add(text) {
+    if (text == "add") {
+    console.log('"error" no task to add!')
+    } else {
+    arg = text.replace("add ", "");
+    tasks.push(arg);
+    console.log(arg + ' has been added to list successfully.')
+    }
+    console.log('----------------------------');
+    }
 
 function remove(text) {
   if (text == "remove") {
@@ -152,6 +162,27 @@ function remove(text) {
 //STEP 5:::::::
 
 
+function edit(text) {
+  if (text == "edit") {
+  console.log('"error" no task to edit!')
+  } else {
+  let arr = text.split(" ")
+  let index = parseInt(arr[1]);
+  if (isNaN(index)) {
+  console.log('Please specify a valid task number to edit.');
+  } else {
+  let str = String(arr.splice(2, arr.length - 2)).replace(/,/g, " ");
+  tasks[index - 1] = str;
+  console.log("Task " + index + " has been changed to " + str + ".");
+  }
+  }
+  console.log('----------------------------');
+  }
+  
+  
+  
+  
+  
 
 
 /**
