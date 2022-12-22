@@ -61,7 +61,6 @@ function onDataReceived(text) {
   }
 }
 
-
 /**
  * prints "unknown command"
  * This function is supposed to run when all other commands have failed
