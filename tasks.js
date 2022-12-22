@@ -124,6 +124,7 @@ function add(task) {
   // Add the task to the list
   tasks.push(task);
   console.log(`Added task: ${task}`);
+  console.log('----------------------------');
 }
 
 function remove(index) {
@@ -132,6 +133,7 @@ function remove(index) {
     index = tasks.length - 1;
   }
   console.log(`Removed task: ${tasks.splice(index, 1)}`);
+  console.log('----------------------------');
 }
 
 
