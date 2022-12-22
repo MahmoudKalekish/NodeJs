@@ -33,7 +33,7 @@ function startApp(name){
  * @param  {string} text data typed by the user
  * @returns {void}
  */
-const List = [help, quit, hello, batata, exit];
+const List = [help, quit, hello, batata, exit, add, remove, list];
 
 
 function onDataReceived(text) {
@@ -45,10 +45,18 @@ function onDataReceived(text) {
   else if(text==='hello\n'){
     hello();
   }
-  
+  else if (text.startsWith("add")) {
+    add(text);
+  }
+  else if (text.startsWith("remove")) {
+    remove(text);
+  }
   
   else if (text.startsWith("hello")) {
     hello(text);
+  }
+  else if (text === "list") {
+    list();
   }
   else if(text === 'batata'){
     batata();
@@ -96,6 +104,34 @@ function help() {
 function hello(arg) {
   arg == "hello" ? console.log("hello!") : console.log(arg + "!");
   console.log('----------------------------');
+}
+
+//taskkkkkkkkkkkkkkkkkkkkkkkkkk
+
+// Initialize an empty array to store the tasks
+const tasks = [];
+
+function list() {
+  // Print the task list
+  console.log('Task list:');
+  for (let i = 0; i < tasks.length; i++) {
+    console.log(`${i + 1}: ${tasks[i]}`);
+  }
+  console.log('----------------------------');
+}
+
+function add(task) {
+  // Add the task to the list
+  tasks.push(task);
+  console.log(`Added task: ${task}`);
+}
+
+function remove(index) {
+  // Remove the task from the list
+  if (index == null) {
+    index = tasks.length - 1;
+  }
+  console.log(`Removed task: ${tasks.splice(index, 1)}`);
 }
 
 
