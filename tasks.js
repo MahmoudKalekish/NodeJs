@@ -106,7 +106,7 @@ function hello(arg) {
   console.log('----------------------------');
 }
 
-//taskkkkkkkkkkkkkkkkkkkkkkkkkk
+//STEP 4::::::::
 
 // Initialize an empty array to store the tasks
 const tasks = [];
@@ -127,14 +127,29 @@ function add(task) {
   console.log('----------------------------');
 }
 
-function remove(index) {
-  // Remove the task from the list
-  if (index == null) {
-    index = tasks.length - 1;
+function remove(text) {
+  if (text == "remove") {
+    tasks.pop();
+    console.log('task ' + (tasks.length + 1) + ' has been removed from list successfully.')
   }
-  console.log(`Removed task: ${tasks.splice(index, 1)}`);
+  else {
+    let arr = text.split(" ");
+    let index = parseInt(arr[1]);
+    if (isNaN(index)) {
+      console.log("please enter a number to remove task");
+    }
+    else if (index < 1 || index > tasks.length) {
+      console.log('this task number is not exist!');
+    }
+    else {
+      tasks.splice(index - 1, 1);
+      console.log('task ' + index + ' has been removed from list successfully.')
+    }
+  }
   console.log('----------------------------');
 }
+
+//STEP 5:::::::
 
 
 
