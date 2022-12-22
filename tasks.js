@@ -138,6 +138,7 @@ function remove(index) {
 
 
 
+
 /**
  * Exits the application
  *
