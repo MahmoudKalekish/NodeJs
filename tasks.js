@@ -76,6 +76,8 @@ function hello(){
 function batata(){
   console.log('batata!');
 }
+// help: when you type this command it will show you all the commands that you can enter.
+
 function help() {
   List.forEach(element => console.log("-", element));
   console.log('----------------------------');
