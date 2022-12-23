@@ -33,7 +33,7 @@ function startApp(name){
  * @param  {string} text data typed by the user
  * @returns {void}
  */
-const List = [help, quit, hello, batata, exit, add, remove, list, edit];
+const List = [help, quit, hello, batata, exit, add, remove, list, edit, check, uncheck];
 
 
 function onDataReceived(text) {
@@ -60,6 +60,12 @@ function onDataReceived(text) {
   }
   else if (text === "list") {
     list();
+  }
+  else if (text.startsWith("check")) {
+    check(text);
+  }
+  else if (text.startsWith("uncheck")) {
+    uncheck(text);
   }
   else if(text === 'batata'){
     batata();
@@ -104,8 +110,8 @@ function help() {
 
 }
 
-function hello(arg) {
-  arg == "hello" ? console.log("hello!") : console.log(arg + "!");
+function hello(text) {
+  text == "hello" ? console.log("hello!") : console.log(text + "!");
   console.log('----------------------------');
 }
 
@@ -113,16 +119,49 @@ function hello(arg) {
 
 // Initialize an empty array to store the tasks
 const tasks = [];
+// tasks.checked=true;
+// taskName=tasks;
 
+// const task = {
+//   description: "get milk",
+//   done: false,
+// };
 
+// function check(index) {
+//   tasks[index].done = true;
+// }
+
+// function list() {
+//   // Print the task list
+//   console.log('Task list:');
+//   for (let i = 0; i < tasks.length; i++) {
+//   console.log(`${i + 1}: ${tasks[i]}`);
+//   }
+//   console.log('----------------------------');
+//   }
 function list() {
-  // Print the task list
-  console.log('Task list:');
-  for (let i = 0; i < tasks.length; i++) {
-  console.log(`${i + 1}: ${tasks[i]}`);
+  let nb = 0;
+  for (let i = 0; i < tasks.length; i += 1) {
+    nb++;
+    console.log(nb + " - " + tasks[i] );
   }
-  console.log('----------------------------');
-  }
+}
+// function list() {
+//   tasks.forEach((obj, index) =>
+//     obj.checked ? console.log(`[✓] ${index + 1}- ${obj.taskName}`) : console.log(`[ ] ${index + 1}- ${obj.taskName}`));
+//   console.log('----------------------------');
+// }
+
+// function list() {
+//   tasks.forEach((obj, index) => {
+//   if (obj.checked) {
+//   console.log(`[✓] ${index + 1}- ${obj.taskName}`);
+//   } else {
+//   console.log(`[ ] ${index + 1}- ${obj.taskName}`);
+//   }
+//   });
+//   console.log('----------------------------');
+//   }
   
 
 
@@ -131,9 +170,11 @@ function list() {
     console.log('"error" no task to add!')
     } else {
     arg = text.replace("add ", "");
-    tasks.push(arg);
+    tasks.push(`[ ] ${arg}`);
+    // tasks.push(arg);
     console.log(arg + ' has been added to list successfully.')
     }
+    list();
     console.log('----------------------------');
     }
 
@@ -179,8 +220,69 @@ function edit(text) {
   console.log('----------------------------');
   }
   
+
+  // STEP 6:::::::::
+
+
+  // function check(text) {
+  //   if (text == "check") {
+  //     console.log('error: no task to be checked');
+  //   } else {
+  //     let index = parseInt(text.replace("check ", ""));
+  //     tasks[index - 1].checked = true;
+  //     console.log('checked successfully');
+  //   }
+  //   console.log('----------------------------');
+  // }
   
+  // function uncheck(text) {
+  //   if (text == "uncheck") {
+  //     console.log('error: no task to be unchecked')
+  //   } else {
+  //     let index = parseInt(text.replace("uncheck ", ""));
+  //     tasks[index - 1].checked = false;
+  //     console.log('unchecked successfully');
+  //   }
+  //   console.log('----------------------------');
+  // }
   
+
+  function check(text) {
+    if (text == "check") {
+    console.log('error: no task to be checked');
+    } else {
+    let index = parseInt(text.replace("check ", ""));
+    if (index < 1 || index > tasks.length) {
+    console.log(`error: invalid task index ${index}`);
+    } else if (tasks[index - 1].checked) {
+    console.log(`error: task ${index} is already checked`);
+    } else if(text.match(/\d+/g)) {
+    // tasks[index - 1].checked = true;
+    let access = (text.match(/\d+/g) - 1) ;
+    tasks[access] = `[✓] ${arg}`;
+    console.log('checked successfully');
+    }
+    list();
+    }
+    console.log('----------------------------');
+    }
+    
+    function uncheck(text) {
+    if (text == "uncheck") {
+    console.log('error: no task to be unchecked')
+    } else {
+    let index = parseInt(text.replace("uncheck ", ""));
+    if (index < 1 || index > tasks.length) {
+    console.log(`error: invalid task index ${index}`);
+    } else if (!tasks[index - 1].checked) {
+    console.log(`error: task ${index} is already unchecked`);
+    } else {
+    tasks[index - 1].checked = false;
+    console.log('unchecked successfully');
+    }
+    }
+    console.log('----------------------------');
+    }
   
   
 
