@@ -257,9 +257,9 @@ function edit(text) {
     } else if (tasks[index - 1].checked) {
     console.log(`error: task ${index} is already checked`);
     } else if(text.match(/\d+/g)) {
-    // tasks[index - 1].checked = true;
+    tasks[index - 1].checked = true;
     let access = (text.match(/\d+/g) - 1) ;
-    tasks[access] = `[✓] ${arg}`;
+    tasks[access] = `[✓] `;
     console.log('checked successfully');
     }
     list();
@@ -267,23 +267,35 @@ function edit(text) {
     console.log('----------------------------');
     }
     
+    // function uncheck(text) {
+    // if (text == "uncheck") {
+    // console.log('error: no task to be unchecked')
+    // } else {
+    // let index = parseInt(text.replace("uncheck ", ""));
+    // if (index < 1 || index > tasks.length) {
+    // console.log(`error: invalid task index ${index}`);
+    // } else if (!tasks[index - 1].checked) {
+    // console.log(`error: task ${index} is already unchecked`);
+    // } else if (text.match(/\d+/g)){
+    // // tasks[index - 1].checked = false;
+    // let access = (text.match(/\d+/g) - 1) ;
+    // tasks[access] = `[ ] `;
+    // console.log('unchecked successfully');
+    // }
+    // }
+    // console.log('----------------------------');
+    // }
     function uncheck(text) {
-    if (text == "uncheck") {
-    console.log('error: no task to be unchecked')
-    } else {
-    let index = parseInt(text.replace("uncheck ", ""));
-    if (index < 1 || index > tasks.length) {
-    console.log(`error: invalid task index ${index}`);
-    } else if (!tasks[index - 1].checked) {
-    console.log(`error: task ${index} is already unchecked`);
-    } else {
-    tasks[index - 1].checked = false;
-    console.log('unchecked successfully');
-    }
-    }
+      if (text === "uncheck") {
+        console.log("error: no task to be unchecked");
+      } else if (text.match(/\d+/g)) {
+        let access = (text.match(/\d+/g) - 1);
+        tasks[access] = "[ ]";
+        list();
+      }
+    
     console.log('----------------------------');
     }
-  
   
 
 
